@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar</title>
+    <%- include("../partials/header.ejs") %>
+</head>
+
+<body>
+    
+    <div class="container">
+    
+
+        <% if (salvo != undefined){ %>
+            <div style="text-align:center; background-color:green; color:white">
+               Livro cadastrado/atualizado com sucesso!
+            </div>
+        <%}%>
+
+        <% if (removido != undefined){ %>
+            <div style="text-align:center; background-color:brown; color:white">
+                Livro removido com sucesso!
+            </div>
+        <%}%>
+
+        <table class="table">
+            
+            <h1 style="font-size:45px;text-align:center;">Listagem</h1>
+            <a class="btn btn-dark" href="/livro/cadastrar"> Cadastrar</a>
+
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Detalhes</th>
+                <th>Atualizar</th>
+                <th>Remover</th>
+            </tr>
+
+            <% for(let livro of listaLivros) {  %>
+                <tr>
+                    <td>
+                        <%= livro.codigo%>
+                    </td>
+                    <td>
+                        <%= livro.nome%>
+                    </td>
+                    <td>
+                        <%= livro.preco%>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/livro/<%= livro.codigo %>"> Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="/livro/cadastrar/<%= livro.codigo %>"> Atualizar</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="return confirm('Confirmar remoção?')" href="/livro/remover/<%= livro.codigo %>"> Remover</a>
+                    </td>
+                </tr>
+
+            <% } %>
+
+        </table>
+
+        <div>
+            <a class="btn btn-dark" href="/" >Voltar</a>
+        </div>
+
+    </div>
+
+</body>
+
+<foot>
+    <%- include("../partials/footer.ejs") %>
+</foot>
+
+
+</html>

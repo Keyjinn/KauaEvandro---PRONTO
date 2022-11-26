@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar</title>
+    <%- include("../partials/header.ejs") %>
+</head>
+
+<body>
+    
+    <div class="container">
+    
+
+        <% if (salvo != undefined){ %>
+            <div style="text-align:center; background-color:green; color:white">
+                Atendente cadastrado com sucesso!
+            </div>
+        <%}%>
+
+        <% if (removido != undefined){ %>
+            <div style="text-align:center; background-color:brown; color:white">
+               Atendente removido com sucesso!
+            </div>
+        <%}%>
+
+        <table class="table">
+            
+            <h1 style="font-size:45px;text-align:center;">Listagem</h1>
+            <a class="btn btn-dark" href="/atendente/cadastrar"> Cadastrar</a>
+
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Detalhes</th>
+                <th>Atualizar</th>
+                <th>Remover</th>
+            </tr>
+
+            <% for(let atendente of listaAtendente) {  %>
+                <tr>
+                    <td>
+                        <%= atendente.nome%>
+                    </td>
+                    <td>
+                        <%= atendente.email%>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/atendente/<%= atendente.email %>"> Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="/atendente/cadastrar/<%= atendente.email %>"> Atualizar</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="return confirm('Confirmar remoção?')" href="/atendente/remover/<%= atendente.email %>"> Remover</a>
+                    </td>
+                </tr>
+
+            <% } %>
+
+        </table>
+
+        <div>
+            <a class="btn btn-dark" href="/" >Voltar</a>
+        </div>
+
+    </div>
+
+</body>
+
+<foot>
+    <%- include("../partials/footer.ejs") %>
+</foot>
+
+
+</html>
